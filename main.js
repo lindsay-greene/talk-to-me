@@ -33,7 +33,7 @@ recognition.maxAlternatives = 1;
 // Create variables for speech synthesis 
 var synth = window.speechSynthesis;
 
-// Speech synthesis function - will speak placeholder text    
+// Speech synthesis function - will speak the placeholder text    
 function speak() {
     var utterance = new SpeechSynthesisUtterance(placeholder.innerHTML);
     utterance.pitch = 1.2;
@@ -52,7 +52,7 @@ recognition.onresult = function(event) {
     var feeling = event.results[0][0].transcript;
     placeholder.innerHTML = "Result received: you are feeling " + feeling + ". Here are some resources you might find helpful.";
     
-    // Make resources visible based on feeling 
+    // Make resources visible based on feeling category
     if(green_feelings.includes(feeling)) {
         results.innerHTML = green_output.innerHTML;
         results.style.backgroundColor = "lawngreen";
@@ -72,6 +72,7 @@ recognition.onresult = function(event) {
         speak();
     }
 
+    // Equivalent of onnomatch property of speech recognition 
     else {
         results.style.visibility = "hidden";
         placeholder.innerHTML = "I didn't recognize that feeling. Please try again.";
