@@ -36,8 +36,17 @@ var synth = window.speechSynthesis;
 // Speech synthesis function - will speak the placeholder text    
 function speak() {
     var utterance = new SpeechSynthesisUtterance(placeholder.innerHTML);
-    utterance.pitch = 1.2;
+    utterance.pitch = 1.0;
     utterance.rate = 1.1;
+    var voices;
+    // Populate voices with available options 
+    window.speechSynthesis.onvoiceschanged = function() {
+        voices = synth.getVoices();
+    };
+    // Set the voice to US English female 
+    utterance.voice = speechSynthesis.getVoices().filter(function(voice) {
+        return voice.name == "Google US English"
+    })[0];
     synth.speak(utterance);
 }
 
