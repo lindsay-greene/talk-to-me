@@ -47,6 +47,7 @@ function speak() {
     utterance.voice = speechSynthesis.getVoices().filter(function(voice) {
         return voice.name == "Google US English"
     })[0];
+    // Built-in speak method for the API 
     synth.speak(utterance);
 }
 
